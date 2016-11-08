@@ -12,6 +12,10 @@ public class Rectangle implements Shape {
         this.width = width;
     }
 
+    public String getName() {
+        return "Прямоугольник";
+    }
+
     public double getWidth() {
         return width;
     }
@@ -29,15 +33,18 @@ public class Rectangle implements Shape {
     }
 
     public String toString() {
-        return "Прямоугольник";
+        return "Фигура: " +  this.getName() + ", Ширина: " + this.getWidth() + ", Высота : " + this.getHeight() +", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter() + "\n";
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Rectangle)) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
         Rectangle r = (Rectangle) obj;
-        return (obj == this) || (length == r.length && width == r.width);
+        return length == r.length && width == r.width;
     }
 
     public int hashCode() {

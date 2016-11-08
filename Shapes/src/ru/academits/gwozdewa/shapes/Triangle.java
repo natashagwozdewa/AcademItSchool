@@ -20,6 +20,10 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
+    public String getName() {
+        return "Треугольник";
+    }
+
     public double getWidth() {
         return findMax(x1, x2, x3) - findMin(x1, x2, x3);
     }
@@ -29,7 +33,7 @@ public class Triangle implements Shape {
     }
 
     public double getArea() {
-        double semiPerimeter = (double) (getPerimeter()) / 2;
+        double semiPerimeter = getPerimeter() / 2;
         return Math.sqrt(semiPerimeter * (semiPerimeter - getFirstSide()) * (semiPerimeter - getSecondSide()) * (semiPerimeter - getThirdSide()));
     }
 
@@ -49,11 +53,11 @@ public class Triangle implements Shape {
         return findLengthOfSide(x2, y2, x3, y3);
     }
 
-    private double findMax(double n1, double n2, double n3) {
+    private static double findMax(double n1, double n2, double n3) {
         return Math.max(Math.max(n1, n2), Math.max(n2, n3));
     }
 
-    private double findMin(double n1, double n2, double n3) {
+    private static double findMin(double n1, double n2, double n3) {
         return Math.min(Math.max(n1, n2), Math.max(n2, n3));
     }
 
@@ -62,15 +66,20 @@ public class Triangle implements Shape {
     }
 
     public String toString() {
-        return "Треугольник";
+        return "Фигура: " + this.getName() + ",\nКоординаты: x1 = " + x1 + " y1 = " + y1 + " x2 = " + x2 +
+                " y2 = " + y2 + " x3 = " + x3 + " y3 = " + y3 + ",\nПлощадь: " + this.getArea()
+                + ", Периметр: " + this.getPerimeter() + "\n";
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Triangle)) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
         Triangle t = (Triangle) obj;
-        return (obj == this) || (x1 == t.x1 && y1 == t.y1 && x2 == t.x2 && y2 == t.y2 && x3 == t.x3 && y3 == t.y3);
+        return x1 == t.x1 && y1 == t.y1 && x2 == t.x2 && y2 == t.y2 && x3 == t.x3 && y3 == t.y3;
     }
 
     public int hashCode() {

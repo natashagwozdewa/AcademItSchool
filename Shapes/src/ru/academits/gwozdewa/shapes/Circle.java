@@ -12,6 +12,10 @@ public class Circle implements Shape {
         diameter = radius * 2;
     }
 
+    public String getName() {
+        return "Окружность";
+    }
+
     public double getWidth() {
         return diameter;
     }
@@ -29,15 +33,18 @@ public class Circle implements Shape {
     }
 
     public String toString() {
-        return "Окружность";
+        return "Фигура: " + this.getName() + ", Радиус: " + radius + ", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter() + "\n";
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Circle)) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
         Circle c = (Circle) obj;
-        return (obj == this) || (radius == c.radius);
+        return radius == c.radius;
     }
 
     public int hashCode() {

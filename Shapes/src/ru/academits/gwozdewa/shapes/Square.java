@@ -10,6 +10,10 @@ public class Square implements Shape {
         this.length = length;
     }
 
+    public String getName() {
+        return "Квадрат";
+    }
+
     public double getWidth() {
         return this.length;
     }
@@ -27,15 +31,18 @@ public class Square implements Shape {
     }
 
     public String toString() {
-        return "Квадрат";
+        return "Фигура: " + this.getName() + ", Длина стороны: " + this.getWidth() + ", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter() + "\n";
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Square)) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
         Square s = (Square) obj;
-        return (obj == this) || (length == s.length);
+        return length == s.length;
     }
 
     public int hashCode() {

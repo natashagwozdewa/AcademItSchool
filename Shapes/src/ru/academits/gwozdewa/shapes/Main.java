@@ -15,8 +15,8 @@ public class Main {
       /* for(Shape x: shapesArrayList)
         {
             System.out.println(x.getArea());
-        }*/
-       /* for(Shape x: shapesArrayList)
+        }
+        for(Shape x: shapesArrayList)
         {
             System.out.println(x.getPerimeter());
         }*/
@@ -28,7 +28,6 @@ public class Main {
         double maxArea = shapesList.get(0).getArea();
         int counter = 0;
         int index = 0;
-        Shape shape;
         for (Shape x : shapesList) {
             if (x.getArea() > maxArea) {
                 maxArea = x.getArea();
@@ -36,26 +35,26 @@ public class Main {
             }
             counter++;
         }
-        shape = shapesList.get(index);
-        System.out.printf("Максимальная площадь: %.2f \n", maxArea);
-        System.out.printf("Фигура: %s, Ширина: %.2f, Высота :  %.2f, Площадь:  %.2f, Периметр:  %.2f \n", shape.toString(), shape.getWidth(), shape.getHeight(), shape.getArea(), shape.getPerimeter());
+        Shape shape = shapesList.get(index);
+        System.out.printf("Максимальная площадь: %.2f %n", maxArea);
+        System.out.printf(shape.toString());
     }
 
     private static void findSecondValuePerimeter(ArrayList<Shape> shapesList) {
-        Double[] perimeterArray = new Double[shapesList.size()];
+        double[] perimeterArray = new double[shapesList.size()];
         int counter = 0;
         Shape shape = shapesList.get(0);
         for (Shape x : shapesList) {
-            perimeterArray[counter] = shapesList.get(counter).getPerimeter();
+            perimeterArray[counter] = x.getPerimeter();
             counter++;
         }
-        Arrays.sort(perimeterArray, Collections.reverseOrder());
+        Arrays.sort(perimeterArray);
         for (Shape x : shapesList) {
-            if (x.getPerimeter() == perimeterArray[1]) {
-                shape = x;
+            if (x.getPerimeter() == perimeterArray[perimeterArray.length -2]) {
+                shape = x; break;
             }
         }
-        System.out.printf("Второй по величине периметр: %.2f \n", shape.getPerimeter());
-        System.out.printf("Фигура: %s, Ширина: %.2f, Высота :  %.2f, Площадь:  %.2f, Периметр:  %.2f", shape.toString(), shape.getWidth(), shape.getHeight(), shape.getArea(), shape.getPerimeter());
+        System.out.printf("Второй по величине периметр: %.2f %n", shape.getPerimeter());
+        System.out.printf(shape.toString());
     }
 }
