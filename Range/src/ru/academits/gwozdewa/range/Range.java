@@ -1,7 +1,8 @@
+package ru.academits.gwozdewa.range;
 
 public class Range {
-    private double from = 4;
-    private double to = 7;
+    private double from = 1;
+    private double to = 3;
 
     public Range() {
     }
@@ -77,18 +78,12 @@ public class Range {
     }
 
     public Range[] findDifference(Range rangeTwo) {
-        if (this.from != rangeTwo.from && this.to != rangeTwo.to) {
-            return new Range[]{new Range(findUnion(rangeTwo)[0].getFrom(), findIntersection(rangeTwo).getFrom()), new Range(findIntersection(rangeTwo).getTo(), findUnion(rangeTwo)[0].getTo())};
+        if (this.from == rangeTwo.from && this.to == rangeTwo.to) {
+            return null;
+        } else if (isNotCross(rangeTwo)) {
+            return new Range[]{new Range(this.from, this.to), rangeTwo};
         } else {
-            if (this.from == rangeTwo.from && this.to == rangeTwo.to) {
-                return new Range[]{};
-            }
-            if (this.from == rangeTwo.from) {
-                return new Range[]{new Range(findIntersection(rangeTwo).getTo(), findUnion(rangeTwo)[0].getTo())};
-            } else // if(rangeOne.to == rangeTwo.to)
-            {
-                return new Range[]{new Range(findUnion(rangeTwo)[0].getFrom(), findIntersection(rangeTwo).getFrom())};
-            }
+            return new Range[]{new Range(findUnion(rangeTwo)[0].getFrom(), findIntersection(rangeTwo).getFrom()), new Range(findIntersection(rangeTwo).getTo(), findUnion(rangeTwo)[0].getTo())};
         }
     }
 }

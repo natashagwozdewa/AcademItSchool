@@ -1,8 +1,9 @@
+package ru.academits.gwozdewa.range;
 
 public class Main {
     public static void main(String[] args) {
         Range range = new Range();
-        Range range2 = new Range(2, 6);
+        Range range2 = new Range(5, 8);
         System.out.println("Длина интервала: " + range2.calculateLengthOfRange());
         if (range.findIntersection(range2) != null) {
             System.out.println("Интервал пересечения: [" + range.findIntersection(range2).getFrom() + ", " + range.findIntersection(range2).getTo() + "]");
@@ -22,20 +23,14 @@ public class Main {
             System.out.println("Интервал объединения: [" + from + ", " + to + "]");
         }
 
-        if (range.findDifference(range2).length == 0) {
+        if (range.findDifference(range2) == null) {
             System.out.println("Разности нет");
         } else {
-            if (range.findDifference(range2).length != 1) {
-                double fromOne = range.findDifference(range2)[0].getFrom();
-                double fromTwo = range.findDifference(range2)[1].getFrom();
-                double toOne = range.findDifference(range2)[0].getTo();
-                double toTwo = range.findDifference(range2)[1].getTo();
-                System.out.println("Интервалы разности: [" + fromOne + ", " + toOne + "], [" + fromTwo + ", " + toTwo + "]");
-            } else {
-                double from = range.findDifference(range2)[0].getFrom();
-                double to = range.findDifference(range2)[0].getTo();
-                System.out.println("Интервал разности: [" + from + ", " + to + "]");
-            }
+            double fromOne = range.findDifference(range2)[0].getFrom();
+            double fromTwo = range.findDifference(range2)[1].getFrom();
+            double toOne = range.findDifference(range2)[0].getTo();
+            double toTwo = range.findDifference(range2)[1].getTo();
+            System.out.println("Интервалы разности: [" + fromOne + ", " + toOne + "], [" + fromTwo + ", " + toTwo + "]");
         }
     }
 }
