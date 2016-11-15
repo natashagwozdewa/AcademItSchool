@@ -11,7 +11,7 @@ public class Main {
         shapesArrayList.add(new Square(4));
         shapesArrayList.add(new Triangle(1, 2, 3, 1, 2, 5));
         shapesArrayList.add(new Rectangle(2, 3));
-        //  shapesArrayList.add(new Circle(3));
+          shapesArrayList.add(new Circle(3));
       /* for(Shape x: shapesArrayList)
         {
             System.out.println(x.getArea());
