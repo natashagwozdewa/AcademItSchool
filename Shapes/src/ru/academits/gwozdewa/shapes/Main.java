@@ -7,10 +7,10 @@ import java.util.Collections;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Shape> shapesArrayList = new ArrayList<Shape>();
-        shapesArrayList.add(new Square(2));
-        shapesArrayList.add(new Square(4));
+       // shapesArrayList.add(new Square(2));
+       // shapesArrayList.add(new Square(4));
         shapesArrayList.add(new Triangle(1, 2, 3, 1, 2, 5));
-        shapesArrayList.add(new Rectangle(2, 3));
+       // shapesArrayList.add(new Rectangle(2, 3));
         //  shapesArrayList.add(new Circle(3));
       /* for(Shape x: shapesArrayList)
         {
@@ -21,6 +21,7 @@ public class Main {
             System.out.println(x.getPerimeter());
         }*/
         findMaxArea(shapesArrayList);
+        System.out.println();
         findSecondValuePerimeter(shapesArrayList);
     }
 
@@ -51,7 +52,8 @@ public class Main {
         Arrays.sort(perimeterArray);
         for (Shape x : shapesList) {
             if (x.getPerimeter() == perimeterArray[perimeterArray.length -2]) {
-                shape = x; break;
+                shape = x;
+                break;
             }
         }
         System.out.printf("Второй по величине периметр: %.2f %n", shape.getPerimeter());

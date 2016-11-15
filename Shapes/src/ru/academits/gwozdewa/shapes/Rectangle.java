@@ -33,7 +33,7 @@ public class Rectangle implements Shape {
     }
 
     public String toString() {
-        return "Фигура: " +  this.getName() + ", Ширина: " + this.getWidth() + ", Высота : " + this.getHeight() +", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter() + "\n";
+        return "Фигура: " +  this.getName() + ", Ширина: " + this.getWidth() + ", Высота : " + this.getHeight() +", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter();
     }
 
     public boolean equals(Object obj) {

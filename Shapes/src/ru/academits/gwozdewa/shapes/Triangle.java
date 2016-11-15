@@ -54,21 +54,21 @@ public class Triangle implements Shape {
     }
 
     private static double findMax(double n1, double n2, double n3) {
-        return Math.max(Math.max(n1, n2), Math.max(n2, n3));
+        return Math.max(Math.max(n1, n2), n3);
     }
 
     private static double findMin(double n1, double n2, double n3) {
-        return Math.min(Math.max(n1, n2), Math.max(n2, n3));
+        return Math.min(Math.max(n1, n2), n3);
     }
 
-    private double findLengthOfSide(double x1, double y1, double x2, double y2) {
+    private static double findLengthOfSide(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
     public String toString() {
         return "Фигура: " + this.getName() + ",\nКоординаты: x1 = " + x1 + " y1 = " + y1 + " x2 = " + x2 +
                 " y2 = " + y2 + " x3 = " + x3 + " y3 = " + y3 + ",\nПлощадь: " + this.getArea()
-                + ", Периметр: " + this.getPerimeter() + "\n";
+                + ", Периметр: " + this.getPerimeter();
     }
 
     public boolean equals(Object obj) {

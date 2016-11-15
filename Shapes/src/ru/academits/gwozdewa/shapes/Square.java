@@ -31,7 +31,7 @@ public class Square implements Shape {
     }
 
     public String toString() {
-        return "Фигура: " + this.getName() + ", Длина стороны: " + this.getWidth() + ", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter() + "\n";
+        return "Фигура: " + this.getName() + ", Длина стороны: " + this.getWidth() + ", Площадь: " + this.getArea() + ", Периметр: " + this.getPerimeter();
     }
 
     public boolean equals(Object obj) {
