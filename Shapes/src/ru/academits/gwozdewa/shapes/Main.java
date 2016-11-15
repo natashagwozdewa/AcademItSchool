@@ -7,10 +7,10 @@ import java.util.Collections;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Shape> shapesArrayList = new ArrayList<Shape>();
-       // shapesArrayList.add(new Square(2));
-       // shapesArrayList.add(new Square(4));
+        shapesArrayList.add(new Square(2));
+        shapesArrayList.add(new Square(4));
         shapesArrayList.add(new Triangle(1, 2, 3, 1, 2, 5));
-       // shapesArrayList.add(new Rectangle(2, 3));
+        shapesArrayList.add(new Rectangle(2, 3));
         //  shapesArrayList.add(new Circle(3));
       /* for(Shape x: shapesArrayList)
         {
