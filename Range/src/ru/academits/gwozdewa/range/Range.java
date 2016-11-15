@@ -1,8 +1,8 @@
 package ru.academits.gwozdewa.range;
 
 public class Range {
-    private double from = 1;
-    private double to = 3;
+    private double from = 2;
+    private double to = 5;
 
     public Range() {
     }
@@ -32,32 +32,11 @@ public class Range {
         return this.from > rangeTwo.to || this.to < rangeTwo.from;
     }
 
-    private boolean isSecondIntervalAfterFirst(Range rangeTwo) {
-        return this.from <= rangeTwo.from && this.to <= rangeTwo.to;
-    }
-
-    private boolean isFirstIntervalInSecond(Range rangeTwo) {
-        return rangeTwo.from <= this.from && this.to <= rangeTwo.to;
-    }
-
-    private boolean isSecondIntervalInFirst(Range rangeTwo) {
-        return this.from <= rangeTwo.from && rangeTwo.to <= this.to;
-    }
-
     public Range findIntersection(Range rangeTwo) {
         if (isNotCross(rangeTwo)) {
             return null;
         } else {
-            if (isSecondIntervalInFirst(rangeTwo)) {
-                return new Range(rangeTwo.from, rangeTwo.to);
-            } else if (isFirstIntervalInSecond(rangeTwo)) {
-                return new Range(this.from, this.to);
-            }
-            if (isSecondIntervalAfterFirst(rangeTwo)) {
-                return new Range(rangeTwo.from, this.to);
-            } else {
-                return new Range(this.from, rangeTwo.to);
-            }
+            return new Range(Math.max(this.from, rangeTwo.from), Math.min(this.to, rangeTwo.to));
         }
     }
 
@@ -65,15 +44,7 @@ public class Range {
         if (isNotCross(rangeTwo)) {
             return new Range[]{new Range(this.from, this.to), rangeTwo};
         } else {
-            if (isSecondIntervalInFirst(rangeTwo)) {
-                return new Range[]{new Range(this.from, this.to)};
-            } else if (isFirstIntervalInSecond(rangeTwo)) {
-                return new Range[]{rangeTwo};
-            } else if (isSecondIntervalAfterFirst(rangeTwo)) {
-                return new Range[]{new Range(this.from, rangeTwo.to)};
-            } else {
-                return new Range[]{new Range(rangeTwo.from, this.to)};
-            }
+            return new Range[]{new Range(Math.min(this.from, rangeTwo.from), Math.max(this.to, rangeTwo.to))};
         }
     }
 

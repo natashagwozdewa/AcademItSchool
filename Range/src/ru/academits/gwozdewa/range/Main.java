@@ -3,7 +3,7 @@ package ru.academits.gwozdewa.range;
 public class Main {
     public static void main(String[] args) {
         Range range = new Range();
-        Range range2 = new Range(5, 8);
+        Range range2 = new Range(1, 3);
         System.out.println("Длина интервала: " + range2.calculateLengthOfRange());
         if (range.findIntersection(range2) != null) {
             System.out.println("Интервал пересечения: [" + range.findIntersection(range2).getFrom() + ", " + range.findIntersection(range2).getTo() + "]");
