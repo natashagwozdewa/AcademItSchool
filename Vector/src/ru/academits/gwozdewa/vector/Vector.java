@@ -53,39 +53,39 @@ public class Vector {
     }
 
     //4.a	Прибавление к вектору другого вектора
-    public double[] addToVector(double[] vector, double[] addedVector) {
-        if (vector.length == addedVector.length) {
+    public Vector addToVector(Vector addedVector) {
+        if (vector.length == addedVector.getSize()) {
             for (int i = 0; i < vector.length; i++) {
-                vector[i] += addedVector[i];
+                vector[i] += addedVector.getValue(i);
             }
-        } else if (vector.length > addedVector.length) {
-            for (int i = 0; i < addedVector.length; i++) {
-                vector[i] += addedVector[i];
+        } else if (vector.length > addedVector.getSize()) {
+            for (int i = 0; i < addedVector.getSize(); i++) {
+                vector[i] += addedVector.getValue(i);
             }
         } else {
             for (int i = 0; i < vector.length; i++) {
-                vector[i] += addedVector[i];
+                vector[i] += addedVector.getValue(i);
             }
         }
-        return vector;
+        return new Vector(vector);
     }
 
     //4.b	Вычитание из вектора другого вектора
-    public double[] deductFromVector(double[] vector, double[] deductibleVector) {
-        if (vector.length == deductibleVector.length) {
+    public Vector deductFromVector(Vector deductibleVector) {
+        if (vector.length == deductibleVector.getSize()) {
             for (int i = 0; i < vector.length; i++) {
-                vector[i] -= deductibleVector[i];
+                vector[i] -= deductibleVector.getValue(i);
             }
-        } else if (vector.length > deductibleVector.length) {
-            for (int i = 0; i < deductibleVector.length; i++) {
-                vector[i] -= deductibleVector[i];
+        } else if (vector.length > deductibleVector.getSize()) {
+            for (int i = 0; i < deductibleVector.getSize(); i++) {
+                vector[i] -= deductibleVector.getValue(i);
             }
         } else {
             for (int i = 0; i < vector.length; i++) {
-                vector[i] -= deductibleVector[i];
+                vector[i] -= deductibleVector.getValue(i);
             }
         }
-        return vector;
+        return new Vector(vector);
     }
 
     //4.c	Умножение вектора на скаляр
@@ -98,111 +98,64 @@ public class Vector {
 
     //4.d	Разворот вектора (умножение всех компонент на -1)
     public double[] reverseVector() {
-        double[] newVector = new double[vector.length];
-        System.arraycopy(vector, 0, newVector, 0, vector.length);
-        for (int i = 0; i < newVector.length; i++) {
-            newVector[i] *= -1;
-        }
-        return newVector;
+        scalarMultVector(-1);
+        return vector;
     }
 
     //4.e.	Получение длины вектора
     public double getNorm() {
         double norm = 0;
-        for (int i = 0; i < vector.length; i++) {
-            norm += Math.pow(vector[i], 2);
+        for (double aVector : vector) {
+            norm += Math.pow(aVector, 2);
         }
         return Math.sqrt(norm);
     }
 
     // 4.f	Получение и установка компоненты вектора по индексу
     public void setValue(int index, double value) {
-        for (int i = 0; i < vector.length; i++) {
-            if (i == index) {
-                vector[i] = value;
+        if (index >= vector.length || index < 0) {
+            throw new IndexOutOfBoundsException("Индекс за пределами границ");
+        } else {
+            for (int i = 0; i < vector.length; i++) {
+                if (i == index) {
+                    vector[i] = value;
+                }
             }
         }
     }
 
     public double getValue(int index) {
-        return vector[index];
+        if (index >= vector.length || index < 0) {
+            throw new IndexOutOfBoundsException("Индекс за пределами границ");
+        } else {
+            return vector[index];
+        }
     }
 
     //5.a	Сложение двух векторов
-    public static double[] sumVectors(double[] vectorOne, double[] vectorTwo) {
-        double[] newVector;
-        if (vectorOne.length == vectorTwo.length) {
-            newVector = new double[vectorOne.length];
-            for (int i = 0; i < newVector.length; i++) {
-                newVector[i] = vectorOne[i] + vectorTwo[i];
-            }
-        } else if (vectorOne.length > vectorTwo.length) {
-            newVector = new double[vectorOne.length];
-            copyArray(vectorOne, newVector);
-            for (int i = 0; i < vectorTwo.length; i++) {
-                newVector[i] += vectorTwo[i];
-            }
-        } else {
-            newVector = new double[vectorTwo.length];
-            copyArray(vectorTwo, newVector);
-            for (int i = 0; i < vectorOne.length; i++) {
-                newVector[i] += vectorOne[i];
-            }
-        }
-        return newVector;
+    public static Vector sumVectors(Vector vectorOne, Vector vectorTwo) {
+        return new Vector(vectorOne).addToVector(vectorTwo);
     }
 
+
     //5.b	Вычитание векторов
-    public static double[] differenceVectors(double[] vectorOne, double[] vectorTwo) {
-        double[] newVector;
-        if (vectorOne.length == vectorTwo.length) {
-            newVector = new double[vectorOne.length];
-            for (int i = 0; i < newVector.length; i++) {
-                newVector[i] = vectorOne[i] - vectorTwo[i];
-            }
-        } else if (vectorOne.length > vectorTwo.length) {
-            newVector = new double[vectorOne.length];
-            copyArray(vectorOne, newVector);
-            for (int i = 0; i < vectorTwo.length; i++) {
-                newVector[i] -= vectorTwo[i];
-            }
-        } else {
-            newVector = new double[vectorTwo.length];
-            copyArray(vectorOne, newVector);
-            for (int i = 0; i < newVector.length; i++) {
-                newVector[i] -= vectorTwo[i];
-            }
-        }
-        return newVector;
+    public static Vector differenceVectors(Vector vectorOne, Vector vectorTwo) {
+        return new Vector(vectorOne).deductFromVector(vectorTwo);
     }
 
     //5.c Скалярное произведение векторов
-    public static double[] multVectors(double[] vectorOne, double[] vectorTwo) {
-        double[] newVector;
-        if (vectorOne.length == vectorTwo.length) {
-            newVector = new double[vectorOne.length];
-            for (int i = 0; i < newVector.length; i++) {
-                newVector[i] = vectorOne[i] * vectorTwo[i];
+    public static double multVectors(Vector vectorOne, Vector vectorTwo) {
+        double scalarMult = 0;
+        if (vectorOne.getSize() == vectorTwo.getSize() || vectorOne.getSize() < vectorTwo.getSize()) {
+            for (int i = 0; i < vectorOne.getSize(); i++) {
+                scalarMult += vectorOne.getValue(i) * vectorTwo.getValue(i);
             }
-        } else if (vectorOne.length > vectorTwo.length) {
-            newVector = new double[vectorOne.length];
-            copyArray(vectorTwo, newVector);
-            for (int i = 0; i < vectorTwo.length; i++) {
-                newVector[i] *= vectorOne[i];
-            }
-        } else {
-            newVector = new double[vectorTwo.length];
-            copyArray(vectorOne, newVector);
-            for (int i = 0; i < newVector.length; i++) {
-                newVector[i] *= vectorTwo[i];
+        } else if (vectorOne.getSize() > vectorTwo.getSize()) {
+            for (int i = 0; i < vectorTwo.getSize(); i++) {
+                scalarMult += vectorOne.getValue(i) * vectorTwo.getValue(i);
             }
         }
-        return newVector;
-    }
-
-    private static double[] copyArray(double[] array, double[] copyArray) {
-        System.arraycopy(array, 0, copyArray, 0, array.length);
-        return copyArray;
+        return scalarMult;
     }
 
     public boolean equals(Object obj) {
@@ -216,7 +169,7 @@ public class Vector {
         if (vector.length == v.getSize()) {
             for (int i = 0; i < this.vector.length; i++) {
                 double epsilon = 1.0e-4;
-                if (!(Math.abs(this.vector[i] - v.vector[i]) <= epsilon)) {
+                if (Math.abs(this.vector[i] - v.vector[i]) > epsilon) {
                     return false;
                 }
             }
