@@ -1,6 +1,4 @@
-/**
- * Created by Наталия on 17.01.2017.
- */
+
 public class Node<T>  {
     private T value;
     private Node prev;
