@@ -1,8 +1,5 @@
 import java.util.HashMap;
 
-/**
- * Created by Наталия on 19.01.2017.
- */
 public class Main {
     public static void main(String[] args) {
         MyHashMap<Integer, String> hashMap = new MyHashMap<Integer, String>();
